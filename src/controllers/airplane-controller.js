@@ -14,7 +14,7 @@ async function createAirplane(req, res){
         successResponse.message = "Successfully plane created"
         successResponse.data = airplane
 
-        return res.status(200).json(successResponse)
+        if(airplane){return res.status(200).json(successResponse)}
     } catch (error) {
         console.log(error)
         return res.status(500).json(errorResponse)
@@ -45,10 +45,13 @@ async function getAirplane (req,res){
         if(airplane == null){
             errorResponse.message = "Airplane not Found"
             errorResponse.success = false
+            errorResponse.data = {}
             return res.status(404).json(errorResponse)
+        }else {
+            successResponse.message  = "Successfully fetched the Airplane"
+            successResponse.data = airplane
+            return res.status(200).json(successResponse)
         }
-        successResponse.data = airplane
-        return res.status(200).json(successResponse)
     } catch (error) {
         errorResponse.error = error;
         res.status(400).json(errorResponse)
@@ -61,6 +64,7 @@ async function deleteAirplane(req, res){
         if(deletedAirplane == 0){
             errorResponse.message = "Airplane not Found"
             errorResponse.success = false
+            errorResponse.data = {}
             return res.status(404).json(errorResponse)
         }
         successResponse.message = "Successfully Airplane get deleted";

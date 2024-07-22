@@ -7,7 +7,7 @@ async function createAirplane(data){
         const response = await airplaneRepositroy.create(data)
         return response;
     } catch (error) {
-        console.log("Error caught in instance of create fn" )
+        console.log("Error caught in airplane service" )
     }
 }
 
